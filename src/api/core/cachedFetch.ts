@@ -29,6 +29,9 @@ export class CachedFetch {
       response = await this.fetchWithRetry(input, options, affectiveCacheConfig.retry);
     }
     response = await this._fetch(input, options);
+    if (options.transform) {
+      response = options.transform(response);
+    }
     this.cache.put(cacheKey, response, affectiveCacheConfig.cacheValidFor);
     return response;
   }

@@ -32,11 +32,8 @@ export function useFetch<R>(input: RequestInfo | URL, options: Omit<APIOptions, 
         .then(resp => {
           setError(null);
           setIsError(false);
-          if (options.transform) {
-            setData(options.transform(resp) as R);
-          } else {
-            setData(resp as R);
-          }
+          setData(resp as R);
+
           if (options.onSuccess) {
             options.onSuccess(resp);
           }
